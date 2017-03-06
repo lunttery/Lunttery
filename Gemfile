@@ -30,9 +30,46 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Use bootsrap
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'font-awesome-rails'
+
+gem 'kaminari'
+
+# for user log in
+gem 'devise'
+
+# for user login in facebook
+gem 'omniauth-facebook'
+
+# use faker to create fake data
+gem 'faker'
+
+# Use rest-client to get the API data
+gem 'rest-client'
+
+#For Geo search
+gem 'geokit-rails'
+
+gem 'awesome_rails_console'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+
+  gem 'pry-byebug'
+  gem 'hirb'
+  gem 'hirb-unicode'
+  gem 'pry-stack_explorer'
+
+  gem "rspec-rails"
+
+  #Factor girl
+  gem 'factory_girl_rails'
+
+  gem 'database_cleaner'
+
+  gem 'simplecov', :require => false
 end
 
 group :development do
@@ -42,7 +79,16 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
+  gem 'capistrano-rails'
+  gem 'capistrano-passenger'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# Please clean up duplicated gems if any.
+# Feel free to remove gems that you don't want to use or if they conflict with other gem dependencies. (you might need to update .pryrc also)
+group :development, :test do
+
+end
