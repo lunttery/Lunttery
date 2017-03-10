@@ -48,8 +48,12 @@ gem 'faker'
 # Use rest-client to get the API data
 gem 'rest-client'
 
-#For Geo search
+# For Geo search
 gem 'geokit-rails'
+
+# DB setting
+gem 'pg'
+gem 'activerecord-postgis-adapter'
 
 gem 'awesome_rails_console'
 

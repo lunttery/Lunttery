@@ -21,3 +21,4 @@
 .byebug_history
 .ruby-version
 .rbenv-gemsets
+/config/database.yml
