@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgis
+  encoding: utf8
+  username: your_name
+  password: your_password
+  host: localhost
+  postgis_extension: true
+  schema_search_path: public, postgis
+
+development:
+  <<: *default
+  database: lunttery_development
+
+test:
+  <<: *default
+  database: lunttery_test
+
+production:
+  <<: *default
+  database: lunttery_production
