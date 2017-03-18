@@ -22,3 +22,6 @@
 .ruby-version
 .rbenv-gemsets
 /config/database.yml
+
+# Ignore facebook app config
+/config/facebook.yml
