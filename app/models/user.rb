@@ -19,6 +19,7 @@ class User < ApplicationRecord
 
     # Case 2: Create new password
     user = User.new
+    user.confirmed_at = Time.now
     user.fb_uid = auth.uid
     user.fb_token = auth.credentials.token
     user.email = "facebook#{rand(2**64)}@lunttery.com"
