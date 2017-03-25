@@ -1,4 +1,5 @@
 class ShopsController < ApplicationController
+  before_action :set_shop, only: [:edit, :update]
 
   def index
     @shops = Shop.all
@@ -17,6 +18,21 @@ class ShopsController < ApplicationController
     else
       flash[:alert] = "新增失敗"
       render :new
+    end
+  end
+
+  def edit
+
+  end
+
+  def update
+
+    if @shop.update(permit_shop)
+      flash[:notice] = "編輯成功"
+      redirect_to shops_path
+    else
+      flash[:alert] = "編輯失敗"
+      render :edit
     end
   end
 
