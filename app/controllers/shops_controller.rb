@@ -1,5 +1,5 @@
 class ShopsController < ApplicationController
-  before_action :set_shop, only: [:edit, :update]
+  before_action :set_shop, only: [:edit, :update, :destroy]
 
   def index
     @shops = Shop.all
@@ -34,6 +34,13 @@ class ShopsController < ApplicationController
       flash[:alert] = "編輯失敗"
       render :edit
     end
+  end
+
+  def destroy
+    @shop.destroy
+
+    flash[:notice] = "刪除成功"
+    redirect_to shops_path
   end
 
   private
