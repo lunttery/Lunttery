@@ -25,3 +25,4 @@
 
 # Ignore facebook app config
 /config/facebook.yml
+/config/email.yml

@@ -1,0 +1,8 @@
+development:
+  address:
+  port:
+  domain:
+  authentication:
+  user_name:
+  password:
+  enable_starttls_auto:

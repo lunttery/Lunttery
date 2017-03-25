@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :confirmable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
   store :fb_raw_data, :accessors => [:provider, :uid, :info, :credentials, :extra]
@@ -19,6 +19,7 @@ class User < ApplicationRecord
 
     # Case 2: Create new password
     user = User.new
+    user.confirmed_at = Time.now
     user.fb_uid = auth.uid
     user.fb_token = auth.credentials.token
     user.email = "facebook#{rand(2**64)}@lunttery.com"
