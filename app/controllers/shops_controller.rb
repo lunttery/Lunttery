@@ -30,7 +30,6 @@ class ShopsController < ApplicationController
   end
 
   def update
-
     if @shop.update(permit_shop)
       flash[:notice] = "編輯成功"
       redirect_to shops_path
@@ -45,6 +44,17 @@ class ShopsController < ApplicationController
 
     flash[:notice] = "刪除成功"
     redirect_to shops_path
+  end
+
+  def search
+    keyword = params[:search]
+    token = Rails.application.config_for(:google)["token"]
+    url = URI.encode("https://maps.googleapis.com/maps/api/place/textsearch/json?language=zh-TW&query=#{keyword}&key=#{token}")
+    doc = RestClient.get url
+    @shops = JSON.parse(doc)["results"]
+    @shops.map! do |shop|
+       { address: shop["formatted_address"], lat: shop["geometry"]["location"]["lat"], lng: shop["geometry"]["location"]["lng"], name: shop["name"], rate: shop["rating"]}
+    end
   end
 
   private

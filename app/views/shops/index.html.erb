@@ -1,4 +1,8 @@
-<%= link_to "新增", new_shop_path %>
+<%= form_tag search_shops_path, :method => :post do %>
+  <%= text_field_tag "search", nil, placeholder: '輸入店家名稱...' %>
+  <%= submit_tag "搜尋", :class => "btn btn-default" %>
+<% end %>
+
 <table class="table">
   <thead>
     <th>名稱</th>
