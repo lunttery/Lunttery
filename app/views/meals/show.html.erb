@@ -1,0 +1,12 @@
+<h1><%= @meal.name %></h1>
+
+<div>名稱：<%= @meal.name %></div>
+<div>價錢：<%= @meal.price %></div>
+<% @meal.photos.each do |photo| %>
+  <div>
+    <%= image_tag photo.url %>
+    <%= image_tag photo.thumb.url %>
+  </div>
+<% end %>
+
+<%= link_to "返回", shop_path(@shop) %>

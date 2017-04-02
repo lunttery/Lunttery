@@ -2,6 +2,10 @@ class MealsController < ApplicationController
   before_action :set_shop
   before_action :set_meal, only: [:show, :edit, :update, :destroy]
 
+  def show
+
+  end
+
   def new
     @meal = @shop.meals.build
   end
