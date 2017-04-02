@@ -32,6 +32,13 @@ class MealsController < ApplicationController
     end
   end
 
+  def destroy
+    @meal.destroy
+
+    flash[:notice] = "刪除成功"
+    redirect_to shop_path(@shop)
+  end
+
   private
 
   def set_meal
