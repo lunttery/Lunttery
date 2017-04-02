@@ -1,0 +1,32 @@
+<%= form_for @shop do |f| %>
+  <% if @shop.errors.any? %>
+  <div class="alert alert-warning" role="alert">
+    <% @shop.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label "名稱" %>:
+    <%= f.text_field :name, class: "form-control" %>
+
+    <%= f.label "電話" %>:
+    <%= f.text_field :phone, class: "form-control" %>
+
+    <%= f.label "地址" %>:
+    <%= f.text_field :address, class: "form-control" %>
+
+    <%= f.label "評分" %>:
+    <%= f.text_field :rate, class: "form-control", type: "number", step: "0.1" %>
+
+    <%= f.label "經度" %>:
+    <%= f.text_field :lng, class: "form-control", type: "number", step: "0.0000001" %>
+
+    <%= f.label "緯度" %>:
+    <%= f.text_field :lat, class: "form-control", type: "number", step: "0.0000001" %>
+
+    <%= f.submit "確認", data: {disable_with: '儲存中...'}, class: "btn btn-primary"%>
+<% end %>
+
+<%= link_to "返回", shops_path %>

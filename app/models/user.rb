@@ -6,6 +6,8 @@ class User < ApplicationRecord
          :omniauthable, :omniauth_providers => [:facebook]
   store :fb_raw_data, :accessors => [:provider, :uid, :info, :credentials, :extra]
 
+  has_many :shops
+
   #定義給controller 的 method
   def self.from_omniauth(auth)
     # Case 1: Find existing user by facebook uid

@@ -67,7 +67,7 @@ group :development, :test do
   gem 'pry-stack_explorer'
 
   gem "rspec-rails"
-
+  gem 'rails-controller-testing'
   #Factor girl
   gem 'factory_girl_rails'
 
