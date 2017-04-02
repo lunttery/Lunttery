@@ -1,0 +1,18 @@
+  <% if @meal.errors.any? %>
+  <div class="alert alert-warning" role="alert">
+    <% @meal.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label "名稱" %>:
+    <%= f.text_field :name, class: "form-control" %>
+
+    <%= f.label "價錢" %>:
+    <%= f.text_field :price, class: "form-control", type: "number" %>
+
+    <%= f.file_field :photos, multiple: true %>
+
+    <%= f.submit "確認", data: {disable_with: '儲存中...'}, class: "btn btn-primary"%>

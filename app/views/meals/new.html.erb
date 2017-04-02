@@ -1,0 +1,7 @@
+<h1>新增</h1>
+
+<%= form_for @meal, :url => shop_meals_path(@shop), method: :post do |f| %>
+  <%= render(partial: "form", locals: {f: f}) %>
+<% end %>
+
+<%= link_to "返回", shop_path(@shop) %>
