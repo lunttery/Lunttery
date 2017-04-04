@@ -27,3 +27,6 @@
 /config/facebook.yml
 /config/email.yml
 /config/google.yml
+
+# Ignore public photos
+/public/uploads

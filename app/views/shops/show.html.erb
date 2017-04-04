@@ -6,4 +6,27 @@
 <div>評分：<%= @shop.rate %></div>
 <div>經度：<%= @shop.lng %></div>
 <div>緯度：<%= @shop.lat %></div>
+
+<%= link_to "新增", new_shop_meal_path(@shop) %>
+
+<table class="table">
+  <thead>
+    <th>名稱</th>
+    <th>價錢</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% @meals.each do |meal| %>
+      <tr>
+        <td><%= link_to meal.name, shop_meal_path(@shop, meal) %></td>
+        <td><%= meal.price %></td>
+        <td>
+          <%= link_to "編輯", edit_shop_meal_path(@shop, meal) %>
+          <%= link_to "刪除", shop_meal_path(@shop, meal), method: :delete, data: {confirm: "你確定嗎？刪錯要重打歐！！！" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <%= link_to "返回", shops_path %>

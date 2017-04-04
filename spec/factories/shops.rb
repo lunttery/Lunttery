@@ -15,7 +15,7 @@
 FactoryGirl.define do
   factory :shop do
     sequence :name do |n|
-      "lunttery#{n}"
+      "shop#{n}"
     end
     address '地址'
     phone '0912345678'
