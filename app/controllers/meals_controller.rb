@@ -1,4 +1,5 @@
 class MealsController < ApplicationController
+  before_action :authenticate_user!, except: [:show]
   before_action :set_shop
   before_action :set_meal, only: [:show, :edit, :update, :destroy]
 

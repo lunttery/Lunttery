@@ -1,4 +1,5 @@
 class ShopsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show, :search]
   before_action :set_shop, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -10,11 +11,11 @@ class ShopsController < ApplicationController
   end
 
   def new
-    @shop = Shop.new
+    @shop = current_user.shops.build
   end
 
   def create
-    @shop = Shop.new(permit_shop)
+    @shop = current_user.shops.build(permit_shop)
 
     if @shop.save
       flash[:notice] = "新增成功"
