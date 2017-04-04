@@ -1,35 +1,26 @@
 require 'rails_helper'
 
-RSpec.describe ShopsController, type: :request do
+RSpec.describe MealsController, type: :request do
   let!(:user) { create(:user, email: "test@gmail.com") }
   let!(:shop) { create(:shop, user_id: user.id) }
+  let!(:meal) { create(:meal, shop_id: shop.id) }
   before(:each) { login_user(user) }
 
-  describe "GET /shops" do
-    before(:each) { get "/shops" }
-
-    it{ expect(response).to be_success }
-    it{ expect(response).to have_http_status(200) }
-    it{ expect(response).to render_template("shops/index") }
-    it{ expect(response.body).to include("#{shop.name}") }
-  end
-
-  describe "POST /shops" do
-    context "create shop success" do
+  describe "POST /shops/:shop_id/meals" do
+    context "create meal success" do
       before(:each) do
         data = {
-          "shop" => {
+          "meal" => {
             "name" => "aaa",
-            "lng" => 121.0,
-            "lat" => 25.0
+            "price" => 1000
           }
         }
 
-        post "/shops", params: data
+        post "/shops/#{shop.id}/meals", params: data
       end
 
       it{ expect(response).to have_http_status(302) }
-      it{ expect(response).to redirect_to(shops_url) }
+      it{ expect(response).to redirect_to(shop_url(shop)) }
       it do
         follow_redirect!
         expect(response).to be_success
@@ -38,31 +29,31 @@ RSpec.describe ShopsController, type: :request do
 
     end
 
-    context "create shop failed" do
-      before(:each) { post "/shops", params: { "shop" => { "name" => "" } } }
+    context "create meal failed" do
+      before(:each) { post "/shops/#{shop.id}/meals", params: { "meal" => { "name" => "" } } }
 
       it{ expect(response).to be_success }
       it{ expect(response).to have_http_status(200) }
-      it{ expect(response).to render_template("shops/new") }
+      it{ expect(response).to render_template("meals/new") }
       it{ expect(flash[:alert]).to eq("新增失敗") }
       it{ expect(response.body).to include("新增失敗") }
     end
   end
 
-  describe "PATCH /shop/:id" do
-    context "update shop success" do
+  describe "PATCH /shops/:shop_id/meal/:id" do
+    context "update meal success" do
       before(:each) do
         data = {
-          "shop" => {
+          "meal" => {
             "name" => "bbb",
           }
         }
 
-        patch "/shops/#{shop.id}", params: data
+        patch "/shops/#{shop.id}/meals/#{meal.id}", params: data
       end
 
       it{ expect(response).to have_http_status(302) }
-      it{ expect(response).to redirect_to(shops_url) }
+      it{ expect(response).to redirect_to(shop_url(shop)) }
       it{ expect(flash[:notice]).to eq("編輯成功") }
       it do
         follow_redirect!
@@ -71,21 +62,21 @@ RSpec.describe ShopsController, type: :request do
       end
     end
 
-    context "update shop failed" do
-      before(:each) { patch "/shops/#{shop.id}", params: { "shop" => { "name" => "" } } }
+    context "update meal failed" do
+      before(:each) { patch "/shops/#{shop.id}/meals/#{meal.id}", params: { "meal" => { "name" => "" } } }
 
       it{ expect(response).to be_success }
       it{ expect(response).to have_http_status(200) }
-      it{ expect(response).to render_template("shops/edit") }
+      it{ expect(response).to render_template("meals/edit") }
     end
   end
 
-  describe "DELETE /shop/:id" do
-    before(:each) { delete "/shops/#{shop.id}" }
+  describe "DELETE /shops/:shop_id/meal/:id" do
+    before(:each) { delete "/shops/#{shop.id}/meals/#{meal.id}" }
 
-    context "destroy shop success" do
+    context "destroy meal success" do
       it{ expect(response).to have_http_status(302) }
-      it{ expect(response).to redirect_to(shops_url) }
+      it{ expect(response).to redirect_to(shop_url(shop)) }
       it{ expect(flash[:notice]).to eq("刪除成功") }
       it do
         follow_redirect!
@@ -95,15 +86,13 @@ RSpec.describe ShopsController, type: :request do
     end
   end
 
-  describe "GET /shop/:id" do
-    let!(:meal) { create(:meal, shop_id: shop.id) }
-    before(:each) { get "/shops/#{shop.id}" }
+  describe "GET /shops/:shop_id/meal/:id" do
+    before(:each) { get "/shops/#{shop.id}/meals/#{meal.id}" }
 
-    context "show shop success" do
+    context "show meal success" do
       it{ expect(response).to be_success }
       it{ expect(response).to have_http_status(200) }
-      it{ expect(response).to render_template("shops/show") }
-      it{ expect(response.body).to include("#{shop.name}") }
+      it{ expect(response).to render_template("meals/show") }
       it{ expect(response.body).to include("#{meal.name}") }
     end
   end
