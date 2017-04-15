@@ -15,12 +15,16 @@
 FactoryGirl.define do
   factory :shop do
     sequence :name do |n|
-      "shop#{n}"
+      "店家#{n}"
     end
-    address '地址'
-    phone '0912345678'
-    rate 4.6
-    lng 121.3
-    lat 25.3
+
+    sequence :address do |n|
+      "地址#{n}"
+    end
+
+    rate (1..50).to_a.sample.to_f / 10
+    phone "09#{Faker::Number.number(8)}"
+    lng Faker::Address.longitude.to_f
+    lat Faker::Address.latitude.to_f
   end
 end

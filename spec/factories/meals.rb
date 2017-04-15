@@ -11,11 +11,9 @@
 FactoryGirl.define do
   factory :meal do
     sequence :name do |n|
-      "meal#{n}"
+      "餐點#{n}"
     end
 
-    sequence :price do |n|
-      100 + n
-    end
+    price (50..150).to_a.sample
   end
 end

@@ -3,11 +3,11 @@ class ShopsController < ApplicationController
   before_action :set_shop, only: [:show, :edit, :update, :destroy]
 
   def index
-    @shops = Shop.all
+    @shops = Shop.all.page(params[:page]).per(10)
   end
 
   def show
-    @meals = @shop.meals
+    @meals = @shop.meals.page(params[:page]).per(10)
   end
 
   def new
