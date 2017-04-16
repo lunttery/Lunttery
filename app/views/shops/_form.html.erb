@@ -26,6 +26,9 @@
     <%= f.label "緯度" %>:
     <%= f.text_field :lat, class: "form-control", type: "number", step: "0.0000001" %>
 
+    <%= f.label "標籤" %>:
+    <%= f.collection_check_boxes(:tag_ids, Tag.where(source_type: "Shop"), :id, :name)%>
+
     <%= f.submit "確認", data: {disable_with: '儲存中...'}, class: "btn btn-primary"%>
 <% end %>
 
