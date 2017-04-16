@@ -17,6 +17,8 @@ class Shop < ApplicationRecord
   before_save :set_location
 
   has_many :meals
+  has_many :taggings, as: :taggable, dependent: :destroy
+  has_many :tags, through: :taggings
   belongs_to :user
 
   def set_location
