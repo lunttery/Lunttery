@@ -13,6 +13,15 @@ desc "重建一些假資料"
               role: "admin",
               confirmed_at: Time.now
             )
+    for shop_tag in 1..10 do
+      @tag = Tag.create(name: "店家標籤#{shop_tag}", source_type: "Shop")
+      puts "新增的店家標籤為: #{@tag.name}"
+    end
+
+    for meal_tag in 1..10 do
+      @tag = Tag.create(name: "餐點標籤#{meal_tag}", source_type: "Meal")
+      puts "新增的餐點標籤為: #{@tag.name}"
+    end
 
     for shop in 1..50 do
       @shop = Shop.create(
@@ -22,7 +31,8 @@ desc "重建一些假資料"
                 lng: Faker::Address.longitude.to_f,
                 lat: Faker::Address.latitude.to_f,
                 rate: (1..50).to_a.sample.to_f / 10,
-                user_id: user.id
+                user_id: user.id,
+                tag_ids: Tag.where(source_type: "Shop").pluck(:id).sample(rand(1..10))
               )
       puts "新增的店家名稱為: #{@shop.name}"
 
@@ -30,7 +40,8 @@ desc "重建一些假資料"
         @meal = Meal.create(
                   name: "餐點#{meal}",
                   price: (50..150).to_a.sample,
-                  shop_id: @shop.id
+                  shop_id: @shop.id,
+                  tag_ids: Tag.where(source_type: "Meal").pluck(:id).sample(rand(1..10))
                 )
         puts "新增的餐點名稱為: #{@meal.name}"
       end
