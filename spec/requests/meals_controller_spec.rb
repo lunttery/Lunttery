@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe MealsController, type: :request do
   let!(:user) { create(:user, email: "test@gmail.com") }
   let!(:shop) { create(:shop, user_id: user.id) }
-  let!(:meal) { create(:meal, shop_id: shop.id) }
+  let!(:tags) { create_list(:meal_tag, 2) }
+  let!(:meal) { create(:meal, shop_id: shop.id, tag_ids: tags.pluck(:id)) }
   before(:each) { login_user(user) }
 
   describe "POST /shops/:shop_id/meals" do
@@ -94,6 +95,8 @@ RSpec.describe MealsController, type: :request do
       it{ expect(response).to have_http_status(200) }
       it{ expect(response).to render_template("meals/show") }
       it{ expect(response.body).to include("#{meal.name}") }
+      it{ expect(response.body).to include("#{tags.first.name}") }
+      it{ expect(response.body).to include("#{tags.last.name}") }
     end
   end
 end

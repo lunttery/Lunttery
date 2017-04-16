@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe ShopsController, type: :request do
   let!(:user) { create(:user, email: "test@gmail.com") }
-  let!(:shop) { create(:shop, user_id: user.id) }
+  let!(:tags) { create_list(:shop_tag, 2) }
+  let!(:shop) { create(:shop, user_id: user.id, tag_ids: tags.pluck(:id)) }
   before(:each) { login_user(user) }
 
   describe "GET /shops" do
@@ -105,6 +106,8 @@ RSpec.describe ShopsController, type: :request do
       it{ expect(response).to render_template("shops/show") }
       it{ expect(response.body).to include("#{shop.name}") }
       it{ expect(response.body).to include("#{meal.name}") }
+      it{ expect(response.body).to include("#{tags.first.name}") }
+      it{ expect(response.body).to include("#{tags.last.name}") }
     end
   end
 end

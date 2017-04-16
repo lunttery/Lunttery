@@ -8,6 +8,18 @@
 
 FactoryGirl.define do
   factory :tag do
+    factory :shop_tag do
+      sequence :name do |n|
+        "店家標籤#{n}"
+      end
+      source_type "Shop"
+    end
 
+    factory :meal_tag do
+      sequence :name do |n|
+        "店家標籤#{n}"
+      end
+      source_type "Meal"
+    end
   end
 end
