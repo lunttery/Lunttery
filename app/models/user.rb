@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :confirmable, :registerable,
@@ -7,6 +8,8 @@ class User < ApplicationRecord
   store :fb_raw_data, :accessors => [:provider, :uid, :info, :credentials, :extra]
 
   has_many :shops
+
+  after_create :add_user_role
 
   #定義給controller 的 method
   def self.from_omniauth(auth)
@@ -32,5 +35,8 @@ class User < ApplicationRecord
     return user
   end
 
+  def add_user_role
+    self.add_role :user
+  end
 
 end
