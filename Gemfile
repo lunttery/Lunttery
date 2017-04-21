@@ -38,6 +38,9 @@ gem 'kaminari'
 
 # for user log in
 gem 'devise'
+# for user authorization
+gem 'rolify'
+gem 'cancancan'
 
 # for user login in facebook
 gem 'omniauth-facebook'
