@@ -1,4 +1,5 @@
 class MealsController < ApplicationController
+  load_and_authorize_resource param_method: :permit_meal
   before_action :authenticate_user!, except: [:show]
   before_action :set_shop
   before_action :set_meal, only: [:show, :edit, :update, :destroy]

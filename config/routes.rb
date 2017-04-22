@@ -9,5 +9,5 @@ Rails.application.routes.draw do
       post :search
     end
   end
-  root to: 'users#show'
+  root to: 'shops#index'
 end
