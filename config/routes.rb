@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :meals
 
     collection do
-      post :search
+      get :search
     end
   end
   root to: 'shops#index'
