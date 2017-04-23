@@ -8,6 +8,7 @@ class User < ApplicationRecord
   store :fb_raw_data, :accessors => [:provider, :uid, :info, :credentials, :extra]
 
   has_many :shops
+  has_many :meals
 
   after_create :add_user_role
 

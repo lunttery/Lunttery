@@ -14,6 +14,7 @@ class MealsController < ApplicationController
 
   def create
     @meal = @shop.meals.build(permit_meal)
+    @meal.user_id = current_user.id
 
     if @meal.save
       flash[:notice] = "新增成功"

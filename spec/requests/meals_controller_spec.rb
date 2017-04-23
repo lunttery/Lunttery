@@ -4,7 +4,7 @@ RSpec.describe MealsController, type: :request do
   let!(:user) { create(:user, email: "test@gmail.com") }
   let!(:shop) { create(:shop, user_id: user.id) }
   let!(:tags) { create_list(:meal_tag, 2) }
-  let!(:meal) { create(:meal, shop_id: shop.id, tag_ids: tags.pluck(:id)) }
+  let!(:meal) { create(:meal, shop_id: shop.id, user_id: user.id, tag_ids: tags.pluck(:id)) }
   before(:each) { login_user(user) }
 
   describe "POST /shops/:shop_id/meals" do

@@ -42,6 +42,7 @@ desc "重建一些假資料"
                   name: "餐點#{meal}",
                   price: (50..150).to_a.sample,
                   shop_id: @shop.id,
+                  user_id: user.id,
                   tag_ids: Tag.where(source_type: "Meal").pluck(:id).sample(rand(1..10))
                 )
         puts "新增的餐點名稱為: #{@meal.name}"

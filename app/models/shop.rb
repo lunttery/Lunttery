@@ -16,7 +16,7 @@ class Shop < ApplicationRecord
   validates_presence_of :name, :lat, :lng, :message => "不能是空！！！"
   before_save :set_location
 
-  has_many :meals
+  has_many :meals, dependent: :destroy
   has_many :taggings, as: :taggable, dependent: :destroy
   has_many :tags, through: :taggings
   belongs_to :user
