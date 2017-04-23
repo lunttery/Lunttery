@@ -1,0 +1,21 @@
+<table class="table">
+  <thead>
+    <th>名稱</th>
+    <th>種類</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% @tags.each do |tag| %>
+      <tr>
+        <td><%= tag.name %></td>
+        <td><%= tag.source_type %></td>
+        <td>
+          <%= link_to "編輯", edit_admin_tag_path(tag) %>
+          <%= link_to "刪除", admin_tag_path(tag), method: :delete, data: {confirm: "你確定嗎？刪錯要重打歐！！！" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @tags %>

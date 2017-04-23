@@ -9,5 +9,10 @@ Rails.application.routes.draw do
       get :search
     end
   end
+
+  namespace :admin do
+    resources :tags
+  end
+
   root to: 'shops#index'
 end
