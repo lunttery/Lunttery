@@ -99,4 +99,34 @@ RSpec.describe MealsController, type: :request do
       it{ expect(response.body).to include("#{tags.last.name}") }
     end
   end
+
+  describe "GET /shops/:shop_id/meal/:id/change_favorite" do
+
+    context "add favorite" do
+      before(:each) { post "/shops/#{shop.id}/meals/#{meal.id}/change_favorite" }
+
+      it do
+        expect(response).to have_http_status(302)
+        expect(response).to redirect_to(shop_meal_path(shop, meal))
+        follow_redirect!
+        expect(response.body).to include("移出我的最愛")
+        expect(response).to be_success
+      end
+    end
+
+    context "remove favorite" do
+      before(:each) do
+        FavoriteMealship.create(user_id: user.id, meal_id: meal.id)
+        post "/shops/#{shop.id}/meals/#{meal.id}/change_favorite"
+      end
+
+      it do
+        expect(response).to have_http_status(302)
+        expect(response).to redirect_to(shop_meal_path(shop, meal))
+        follow_redirect!
+        expect(response.body).to include("加到我的最愛")
+        expect(response).to be_success
+      end
+    end
+  end
 end
