@@ -9,6 +9,8 @@ class User < ApplicationRecord
 
   has_many :shops
   has_many :meals
+  has_many :favorite_mealships, dependent: :destroy
+  has_many :favorite_meals, through: :favorite_mealships, source: :meal
 
   after_create :add_user_role
 

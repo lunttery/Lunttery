@@ -2,10 +2,10 @@ class MealsController < ApplicationController
   load_and_authorize_resource param_method: :permit_meal
   before_action :authenticate_user!, except: [:show]
   before_action :set_shop
-  before_action :set_meal, only: [:show, :edit, :update, :destroy]
+  before_action :set_meal, only: [:show, :edit, :update, :destroy, :change_favorite]
 
   def show
-
+    @favorite_meal = @meal.favorite_mealships.find_by(user_id: current_user.id) if current_user
   end
 
   def new
@@ -44,6 +44,16 @@ class MealsController < ApplicationController
 
     flash[:notice] = "刪除成功"
     redirect_to shop_path(@shop)
+  end
+
+  def change_favorite
+    if @favorite_meal = @meal.favorite_mealships.find_by(user_id: current_user.id)
+      @favorite_meal.destroy
+      @favorite_meal = nil
+    else
+      @favorite_meal = @meal.favorite_mealships.create(user_id: current_user.id)
+    end
+    redirect_to shop_meal_path(@shop, @meal)
   end
 
   private

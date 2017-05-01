@@ -37,6 +37,7 @@ class Ability
     elsif user.has_role? :user
       can [:create, :read], [User, Shop, Meal]
       can [:update, :destroy], [Shop, Meal], {user_id: user.id}
+      can [:change_favorite], [Meal]
 
       can [:search], [Shop]
     end
