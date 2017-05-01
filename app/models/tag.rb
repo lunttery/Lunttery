@@ -10,5 +10,7 @@ class Tag < ApplicationRecord
   has_many :taggings, dependent: :destroy
   has_many :shops, source: :taggable, source_type: "Shop", through: :taggings
   has_many :meals, source: :taggable, source_type: "Meal", through: :taggings
+
+  SOURCE_TYPES = {"店家標籤" => "Shop", "餐點標籤" => "Meal"}
 end
 
