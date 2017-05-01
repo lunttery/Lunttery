@@ -7,6 +7,8 @@
 # end
 
 class Tag < ApplicationRecord
+  validates_presence_of :name, :message => "不能是空！！！"
+
   has_many :taggings, dependent: :destroy
   has_many :shops, source: :taggable, source_type: "Shop", through: :taggings
   has_many :meals, source: :taggable, source_type: "Meal", through: :taggings

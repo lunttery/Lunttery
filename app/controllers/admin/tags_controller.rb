@@ -21,7 +21,25 @@ class Admin::TagsController < Admin::BaseController
     end
   end
 
+  def edit
+
+  end
+
+  def update
+    if @tag.update(permit_tag)
+      flash[:notice] = "編輯成功"
+      redirect_to admin_tags_path
+    else
+      flash[:alert] = "編輯失敗"
+      render :edit
+    end
+  end
+
   private
+
+  def set_tag
+    @tag = Tag.find(params[:id])
+  end
 
   def permit_tag
     params.require(:tag).permit(:name, :source_type)
