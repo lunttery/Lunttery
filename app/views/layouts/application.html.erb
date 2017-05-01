@@ -39,6 +39,9 @@
               <ul class="dropdown-menu">
                 <li><%= link_to "尋找餐廳", shops_path %></li>
                 <li><%= link_to "尋找餐點", "#" %></li>
+                <% if current_user %>
+                  <li><%= link_to "最愛的餐點", favorite_meals_path %></li>
+                <% end %>
                 <% if current_user && current_user.has_role?(:admin) %>
                   <li><%= link_to "標籤管理", admin_tags_path %></li>
                 <% end %>

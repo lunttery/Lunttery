@@ -1,0 +1,20 @@
+<h1>最愛的餐點</h1>
+
+<table class="table">
+  <thead>
+    <th>名稱</th>
+    <th>價錢</th>
+  </thead>
+  <tbody>
+    <% @favorite_meals.each do |meal| %>
+      <tr>
+        <td><%= link_to meal.name, shop_meal_path(meal.shop, meal) %></td>
+        <td><%= meal.price %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @favorite_meals %>
+
+<%= link_to "返回", shops_path %>
