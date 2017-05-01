@@ -35,6 +35,13 @@ class Admin::TagsController < Admin::BaseController
     end
   end
 
+  def destroy
+    @tag.destroy
+
+    flash[:notice] = "刪除成功"
+    redirect_to admin_tags_path
+  end
+
   private
 
   def set_tag
