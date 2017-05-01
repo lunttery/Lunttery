@@ -17,7 +17,7 @@ FactoryGirl.define do
 
     factory :meal_tag do
       sequence :name do |n|
-        "店家標籤#{n}"
+        "餐點標籤#{n}"
       end
       source_type "Meal"
     end

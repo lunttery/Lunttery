@@ -5,5 +5,11 @@ FactoryGirl.define do
     end
     password "12345678"
     confirmed_at Time.now
+
+    factory :admin do
+      after(:create) do |user|
+        user.add_role :admin
+      end
+    end
   end
 end
