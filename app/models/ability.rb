@@ -38,6 +38,8 @@ class Ability
       can [:create, :read], [User, Shop, Meal]
       can [:update, :destroy], [Shop, Meal], {user_id: user.id}
 
+      can [:change_favorite], [Meal]
+      can [:favorite_meals], [User]
       can [:search], [Shop]
     end
 

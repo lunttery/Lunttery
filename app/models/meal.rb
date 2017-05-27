@@ -15,5 +15,8 @@ class Meal < ApplicationRecord
   belongs_to :user
   has_many :taggings, as: :taggable, dependent: :destroy
   has_many :tags, through: :taggings
+  has_many :favorite_mealships, dependent: :destroy
+  has_many :favorited_users, through: :favorite_mealships, source: :user
+
   mount_uploaders :photos, Meal::PhotosUploader
 end

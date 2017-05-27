@@ -1,5 +1,11 @@
 <h1><%= @meal.name %></h1>
 
+<% if current_user && @favorite_meal %>
+  <%= link_to "移出我的最愛", change_favorite_shop_meal_path(@shop, @meal), method: :post, class: "btn btn-danger" %>
+<% elsif current_user %>
+  <%= link_to "加到我的最愛", change_favorite_shop_meal_path(@shop, @meal), method: :post, class: "btn btn-primary" %>
+<% end %>
+
 <div>名稱：<%= @meal.name %></div>
 <div>價錢：<%= @meal.price %></div>
 <div>標籤：
