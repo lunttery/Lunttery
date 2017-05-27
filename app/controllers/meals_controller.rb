@@ -1,4 +1,5 @@
 class MealsController < ApplicationController
+  load_and_authorize_resource param_method: :permit_meal
   before_action :authenticate_user!, except: [:show]
   before_action :set_shop
   before_action :set_meal, only: [:show, :edit, :update, :destroy]
@@ -13,6 +14,7 @@ class MealsController < ApplicationController
 
   def create
     @meal = @shop.meals.build(permit_meal)
+    @meal.user_id = current_user.id
 
     if @meal.save
       flash[:notice] = "新增成功"
@@ -55,6 +57,6 @@ class MealsController < ApplicationController
   end
 
   def permit_meal
-    params.require(:meal).permit(:name, :price, { photos: [] })
+    params.require(:meal).permit(:name, :price, { photos: [] }, tag_ids: [])
   end
 end

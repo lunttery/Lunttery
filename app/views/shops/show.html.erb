@@ -6,6 +6,11 @@
 <div>評分：<%= @shop.rate %></div>
 <div>經度：<%= @shop.lng %></div>
 <div>緯度：<%= @shop.lat %></div>
+<div>標籤：
+  <% @shop.tags.each do |tag| %>
+    <%= tag.name %>
+  <% end %>
+</div>
 
 <%= link_to "新增", new_shop_meal_path(@shop) %>
 

@@ -2,6 +2,11 @@
 
 <div>名稱：<%= @meal.name %></div>
 <div>價錢：<%= @meal.price %></div>
+<div>標籤：
+  <% @meal.tags.each do |tag| %>
+    <%= tag.name %>
+  <% end %>
+</div>
 <% @meal.photos.each do |photo| %>
   <div>
     <%= image_tag photo.url %>

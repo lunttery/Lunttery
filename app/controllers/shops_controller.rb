@@ -1,4 +1,5 @@
 class ShopsController < ApplicationController
+  load_and_authorize_resource param_method: :permit_shop
   before_action :authenticate_user!, except: [:index, :show, :search]
   before_action :set_shop, only: [:show, :edit, :update, :destroy]
 
@@ -65,7 +66,7 @@ class ShopsController < ApplicationController
   end
 
   def permit_shop
-    params.require(:shop).permit(:name, :phone, :address, :rate, :lng, :lat)
+    params.require(:shop).permit(:name, :phone, :address, :rate, :lng, :lat, tag_ids: [])
   end
 
 end

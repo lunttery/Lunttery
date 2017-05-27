@@ -6,8 +6,13 @@ Rails.application.routes.draw do
     resources :meals
 
     collection do
-      post :search
+      get :search
     end
   end
-  root to: 'users#show'
+
+  namespace :admin do
+    resources :tags
+  end
+
+  root to: 'shops#index'
 end
