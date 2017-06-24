@@ -1,3 +1,20 @@
 // Place all the styles related to the shops controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "application.css.scss";
+h1 span{
+  font-size: 0.6em;
+}
+.meal_pic{
+  display: block;
+  height: 250px;
+  width: 100%;
+  background-image: image-url('lunttery_icon.png');
+  background-size: cover;
+  background-position: center;
+  margin-top: 15px;
+}
+h2 a{
+  font-size: 0.7em;
+}

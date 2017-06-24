@@ -17,3 +17,29 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
+
+$mainColor: #FF7676;
+$subColor: #FF8F8F;
+$mainGray: #7C7C7C;
+$subGray: #F7F7F7;
+$mainYellow: #FFC859;
+
+body{
+  color: $mainGray;
+}
+.mainColor{
+  color: $mainColor;
+}
+.mainYellow{
+  color: $mainYellow;
+}
+.navbar-fixed-top{
+  background-color: $mainColor;
+}
+.navbar-default .navbar-nav > li > a{
+  color: white;
+}
+.navbar-default .navbar-nav > li > a:hover{
+  color: white;
+  background-color: $subColor;
+}

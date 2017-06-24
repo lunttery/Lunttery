@@ -1,38 +1,30 @@
-<h1><%= @shop.name %></h1>
+<h1><%= @shop.name %>
+<span class="mainYellow"><i class="fa fa-star" aria-hidden="true"></i>  <%= @shop.rate %></span> </h1>
 
-<div>名稱：<%= @shop.name %></div>
-<div>電話：<%= @shop.phone %></div>
-<div>地址：<%= @shop.address %></div>
-<div>評分：<%= @shop.rate %></div>
-<div>經度：<%= @shop.lng %></div>
-<div>緯度：<%= @shop.lat %></div>
-<div>標籤：
+<div><i class="fa fa-phone mainColor" aria-hidden="true"></i>  <%= @shop.phone %> </div>
+<div><i class="fa fa-home mainColor" aria-hidden="true"></i>  <%= @shop.address %></div>
+<div><i class="fa fa-tags mainColor" aria-hidden="true"></i>
   <% @shop.tags.each do |tag| %>
     <%= tag.name %>
   <% end %>
 </div>
 
-<%= link_to "新增", new_shop_meal_path(@shop) %>
+<%= link_to "新增餐點", new_shop_meal_path(@shop), class: "btn" %>
 
-<table class="table">
-  <thead>
-    <th>名稱</th>
-    <th>價錢</th>
-    <th></th>
-  </thead>
-  <tbody>
-    <% @meals.each do |meal| %>
-      <tr>
-        <td><%= link_to meal.name, shop_meal_path(@shop, meal) %></td>
-        <td><%= meal.price %></td>
-        <td>
-          <%= link_to "編輯", edit_shop_meal_path(@shop, meal) %>
-          <%= link_to "刪除", shop_meal_path(@shop, meal), method: :delete, data: {confirm: "你確定嗎？刪錯要重打歐！！！" } %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<hr>
+
+<% @meals.each do |meal| %>
+<div class="col-md-3 col-sm-4 col-xs-12">
+    <div class="meal_pic"></div>
+    <h2><%= link_to meal.name, shop_meal_path(@shop, meal) %></h2>
+    <div class=""><%= meal.price %>元<span class=""><i class="fa fa-heart-o" aria-hidden="true"></i>30</span></div>
+    <span class="">#四平商圈</span>
+    <%= link_to "編輯", edit_shop_meal_path(@shop, meal) %>
+    <%= link_to "刪除", shop_meal_path(@shop, meal), method: :delete, data: {confirm: "你確定嗎？刪錯要重打歐！！！" } %>
+</div><!-- meal_info -->
+<% end %>
+
+
 
 <%= paginate @meals %>
 
